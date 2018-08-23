@@ -1,3 +1,6 @@
+*.ez
+*.swo
+*.swp
 /_build
 /cover
 /deps
@@ -7,3 +10,5 @@ erl_crash.dump
 *.ez
 *.beam
 /config/*.secret.exs
+*/assets/node_modules
+/priv/static
