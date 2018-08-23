@@ -13,18 +13,10 @@ defmodule Api.Schema do
 
   mutation do
 
-   @type %{
-    "foo" => %{id: "foo"},
-    "bar" => %{id: "bar"}
-  }
-
     @desc "Create a new Telephone info"
     field :create_telephone_info, type: :telephone_info do
       arg(:id, non_null(:integer))
       arg(:type, non_null(:string))
-      resolve fn %{id: item_id}, _ ->
-        {:ok, @items[item_id]}
-      end
       arg(:timestamp, non_null(:string))
       arg(:call_id, non_null(:integer))
       arg(:source, :string)
