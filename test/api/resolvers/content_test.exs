@@ -11,7 +11,7 @@ defmodule Api.Resolvers.ContentTest do
             }
           }
         }} =
-          Absinthe.run("api",
+          Absinthe.run(
             """
             mutation createTelephoneInfo {
             createTelephoneInfo(
@@ -26,6 +26,7 @@ defmodule Api.Resolvers.ContentTest do
             }
             }
             """,
+            "api",
             "param"
           )
     end

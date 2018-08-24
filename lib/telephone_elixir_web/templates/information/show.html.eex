@@ -1,0 +1,43 @@
+<h2>Show Information</h2>
+
+<ul>
+
+  <li>
+    <strong>Id start call:</strong>
+    <%= @information.id_start_call %>
+  </li>
+
+  <li>
+    <strong>Timestamp start call:</strong>
+    <%= @information.timestamp_start_call %>
+  </li>
+
+  <li>
+    <strong>Call:</strong>
+    <%= @information.call_id %>
+  </li>
+
+  <li>
+    <strong>Source:</strong>
+    <%= @information.source %>
+  </li>
+
+  <li>
+    <strong>Destination:</strong>
+    <%= @information.destination %>
+  </li>
+
+  <li>
+    <strong>Id end call:</strong>
+    <%= @information.id_end_call %>
+  </li>
+
+  <li>
+    <strong>Timestamp end call:</strong>
+    <%= @information.timestamp_end_call %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: information_path(@conn, :edit, @information) %></span>
+<span><%= link "Back", to: information_path(@conn, :index) %></span>

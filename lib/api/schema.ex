@@ -17,7 +17,7 @@ defmodule Api.Schema do
     field :create_telephone_info, type: :telephone_info do
       arg(:id, non_null(:integer))
       arg(:type, non_null(:string))
-      arg(:timestamp, non_null(:string))
+      arg(:timestamp_call, non_null(:string))
       arg(:call_id, non_null(:integer))
       arg(:source, :string)
       arg(:destination, :string)

@@ -15,6 +15,7 @@ defmodule TelephoneElixirWeb.Router do
 
   scope "/", TelephoneElixirWeb do
     pipe_through :browser # Use the default browser stack
+    resources "/informations", InformationController
 
     get "/", PageController, :index
   end

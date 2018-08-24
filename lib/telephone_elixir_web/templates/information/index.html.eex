@@ -1,0 +1,38 @@
+<h2>Listing Informations</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id start call</th>
+      <th>Timestamp start call</th>
+      <th>Call</th>
+      <th>Source</th>
+      <th>Destination</th>
+      <th>Id end call</th>
+      <th>Timestamp end call</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for information <- @informations do %>
+    <tr>
+      <td><%= information.id_start_call %></td>
+      <td><%= information.timestamp_start_call %></td>
+      <td><%= information.call_id %></td>
+      <td><%= information.source %></td>
+      <td><%= information.destination %></td>
+      <td><%= information.id_end_call %></td>
+      <td><%= information.timestamp_end_call %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: information_path(@conn, :show, information), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: information_path(@conn, :edit, information), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: information_path(@conn, :delete, information), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Information", to: information_path(@conn, :new) %></span>

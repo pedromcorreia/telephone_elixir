@@ -1,0 +1,53 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :id_start_call, class: "control-label" %>
+    <%= number_input f, :id_start_call, class: "form-control" %>
+    <%= error_tag f, :id_start_call %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :timestamp_start_call, class: "control-label" %>
+    <%= datetime_select f, :timestamp_start_call, class: "form-control" %>
+    <%= error_tag f, :timestamp_start_call %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :call_id, class: "control-label" %>
+    <%= number_input f, :call_id, class: "form-control" %>
+    <%= error_tag f, :call_id %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :source, class: "control-label" %>
+    <%= text_input f, :source, class: "form-control" %>
+    <%= error_tag f, :source %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :destination, class: "control-label" %>
+    <%= text_input f, :destination, class: "form-control" %>
+    <%= error_tag f, :destination %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :id_end_call, class: "control-label" %>
+    <%= number_input f, :id_end_call, class: "form-control" %>
+    <%= error_tag f, :id_end_call %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :timestamp_end_call, class: "control-label" %>
+    <%= datetime_select f, :timestamp_end_call, class: "form-control" %>
+    <%= error_tag f, :timestamp_end_call %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
