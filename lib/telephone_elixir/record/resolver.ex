@@ -26,6 +26,7 @@ defmodule TelephoneElixir.Record.Resolver do
       information_exitent = TelephoneElixir.Record.get_information_by_call_id(Map.get(arg, :call_id, nil))
 
       TelephoneElixir.Record.update_information(information_exitent, build_telephone_end(arg))
+      |> IO.inspect
     end
 
   def create_telephone_call(arg), do: nil
@@ -36,7 +37,8 @@ defmodule TelephoneElixir.Record.Resolver do
       destination: Map.get(arg, :destination, nil),
       source: Map.get(arg, :source, nil),
       timestamp_start_call: Map.get(arg, :timestamp_call, nil),
-      type: Map.get(arg, :type, nil)
+      type: Map.get(arg, :type, nil),
+      rule: create_rule(arg)
     }
   end
 
@@ -46,5 +48,19 @@ defmodule TelephoneElixir.Record.Resolver do
       timestamp_end_call: Map.get(arg, :timestamp_call, nil),
       type: Map.get(arg, :type, nil)
     }
+  end
+
+  def create_rule(attrs) do
+    timestamp_start_call =
+      attrs
+      |> Map.get(:timestamp_call)
+      |> NaiveDateTime.from_iso8601!
+      |> NaiveDateTime.to_time()
+
+    if timestamp_start_call >= ~T[06:00:00] and timestamp_start_call < ~T[22:00:00] do
+      1
+    else
+      2
+    end
   end
 end

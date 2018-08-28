@@ -9,6 +9,7 @@ defmodule TelephoneElixir.Record.Information do
     field :timestamp_end_call, :naive_datetime
     field :timestamp_start_call, :naive_datetime
     field :type, :string
+    field :rule, :integer
 
     timestamps()
   end
@@ -16,8 +17,8 @@ defmodule TelephoneElixir.Record.Information do
   @doc false
   def changeset_start(information, attrs) do
     information
-    |> cast(attrs, [:timestamp_start_call, :call_id, :source, :destination, :type])
-    |> validate_required([:timestamp_start_call, :call_id, :source, :destination, :type])
+    |> cast(attrs, [:timestamp_start_call, :call_id, :source, :destination, :type, :rule])
+    |> validate_required([:timestamp_start_call, :call_id, :source, :destination, :type, :rule])
     |> validate_format(:destination, ~r/^[0-9]{10,11}$/)
     |> validate_format(:source, ~r/^[0-9]{10,11}$/)
     |> validate_inclusion(:type, ["start"])
