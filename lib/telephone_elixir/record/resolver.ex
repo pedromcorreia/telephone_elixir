@@ -22,6 +22,7 @@ defmodule TelephoneElixir.Record.Resolver do
       type: type
     } = arg) do
 
+      #TODO replace this var name and add a conditional for not find
       information_exitent = TelephoneElixir.Record.get_information_by_call_id(Map.get(arg, :call_id, nil))
 
       TelephoneElixir.Record.update_information(information_exitent, build_telephone_end(arg))

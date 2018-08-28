@@ -14,13 +14,6 @@ defmodule TelephoneElixir.Record.Information do
   end
 
   @doc false
-  def changeset(information, attrs) do
-    information
-    |> cast(attrs, [:id_start_call, :timestamp_start_call, :call_id, :source, :destination, :id_end_call, :timestamp_end_call])
-    |> validate_required([:id_start_call, :timestamp_start_call, :call_id, :source, :destination, :id_end_call, :timestamp_end_call])
-  end
-
-  @doc false
   def changeset_start(information, attrs) do
     information
     |> cast(attrs, [:timestamp_start_call, :call_id, :source, :destination, :type])
@@ -45,7 +38,7 @@ defmodule TelephoneElixir.Record.Information do
   def valid_destination(attrs) do
     source = get_change(attrs, :source)
     destination = get_change(attrs, :destination)
-     case source do
+    case source do
       ^destination -> add_error(attrs, :numbers, "destination is not valid")
       _ -> attrs
     end
