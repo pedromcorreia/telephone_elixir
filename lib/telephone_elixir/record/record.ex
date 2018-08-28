@@ -70,7 +70,6 @@ defmodule TelephoneElixir.Record do
   def update_information(%Information{} = information, attrs) do
     information
     |> Information.changeset_end(attrs)
-    |> IO.inspect
     |> Repo.update()
   end
 

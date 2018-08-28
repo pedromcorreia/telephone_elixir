@@ -1,6 +1,18 @@
 defmodule Api.Resolvers.ContentTest do
   use TelephoneElixirWeb.ConnCase
-  describe "#create/3" do
+
+  describe "#create/2" do
+    test "try insert new telephone info with not valid params" do
+
+      assert {:error, "Access denied"} =
+          """
+      mutation createTelephoneInfo {
+      createTelephoneInfo()
+      }
+      """
+      |> Absinthe.run(Api.Schema)
+    end
+
     test "insert new telephone info" do
 
       assert {:ok,
@@ -11,24 +23,21 @@ defmodule Api.Resolvers.ContentTest do
             }
           }
         }} =
-          Absinthe.run(
-            """
-            mutation createTelephoneInfo {
-            createTelephoneInfo(
-            callId: 1,
-            destination: "123456789",
-            id: 1,
-            type: "start",
-            source: "987654321",
-            timestamp: "12341234"
-            ) {
-            id
-            }
-            }
-            """,
-            "api",
-            "param"
-          )
+          """
+      mutation createTelephoneInfo {
+      createTelephoneInfo(
+      id: 1,
+      type: "start",
+      timestamp_call: "12341234"
+      call_id: 1,
+      source: "987654321",
+      destination: "123456789",
+      ) {
+      id
+      }
+      }
+      """
+      |> Absinthe.run(Api.Schema)
     end
   end
 end

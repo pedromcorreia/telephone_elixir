@@ -21,7 +21,7 @@ defmodule Api.Schema do
       arg(:call_id, non_null(:integer))
       arg(:source, :string)
       arg(:destination, :string)
-      resolve(&Api.Resolvers.Content.create_telephone_info/3)
+      resolve(&Api.Resolvers.Content.create_telephone_info/2)
     end
   end
 end
