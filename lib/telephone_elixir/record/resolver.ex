@@ -21,9 +21,10 @@ defmodule TelephoneElixir.Record.Resolver do
       timestamp_call: timestamp_call,
       type: type
     } = arg) do
-      arg
-      |> build_telephone_end()
-      |> TelephoneElixir.Record.create_information()
+
+      information_exitent = TelephoneElixir.Record.get_information_by_call_id(Map.get(arg, :call_id, nil))
+
+      TelephoneElixir.Record.update_information(information_exitent, build_telephone_end(arg))
     end
 
   def create_telephone_call(arg), do: nil
@@ -32,7 +33,6 @@ defmodule TelephoneElixir.Record.Resolver do
     %{
       call_id: Map.get(arg, :call_id, nil),
       destination: Map.get(arg, :destination, nil),
-      id_start_call: Map.get(arg, :id, nil),
       source: Map.get(arg, :source, nil),
       timestamp_start_call: Map.get(arg, :timestamp_call, nil),
       type: Map.get(arg, :type, nil)
@@ -42,7 +42,6 @@ defmodule TelephoneElixir.Record.Resolver do
   defp build_telephone_end(arg) do
     %{
       call_id: Map.get(arg, :call_id, nil),
-      id_end_call: Map.get(arg, :id, nil),
       timestamp_end_call: Map.get(arg, :timestamp_call, nil),
       type: Map.get(arg, :type, nil)
     }

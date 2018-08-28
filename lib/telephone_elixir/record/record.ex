@@ -35,7 +35,7 @@ defmodule TelephoneElixir.Record do
       ** (Ecto.NoResultsError)
 
   """
-  def get_information!(id), do: Repo.get!(Information, id)
+  def get_information_by_call_id(id), do: Repo.get_by(Information, call_id: id)
 
   @doc """
   Creates a information.
