@@ -1,0 +1,33 @@
+<h2>Show Bill</h2>
+
+<ul>
+
+  <li>
+    <strong>Destination:</strong>
+    <%= @bill.destination %>
+  </li>
+
+  <li>
+    <strong>Timestamp start call:</strong>
+    <%= @bill.timestamp_start_call %>
+  </li>
+
+  <li>
+    <strong>Timestamp end call:</strong>
+    <%= @bill.timestamp_end_call %>
+  </li>
+
+  <li>
+    <strong>Call duration:</strong>
+    <%= @bill.call_duration %>
+  </li>
+
+  <li>
+    <strong>Call price:</strong>
+    <%= @bill.call_price %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: bill_path(@conn, :edit, @bill) %></span>
+<span><%= link "Back", to: bill_path(@conn, :index) %></span>

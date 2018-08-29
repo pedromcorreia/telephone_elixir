@@ -74,4 +74,72 @@ defmodule TelephoneElixir.RecordTest do
       assert %Ecto.Changeset{} = Record.change_information(information)
     end
   end
+
+  describe "bill" do
+    alias TelephoneElixir.Record.Bill
+
+    @valid_attrs %{call_duration: ~N[2010-04-17 14:00:00.000000], call_price: 42, destination: "some destination", timestamp_end_call: ~N[2010-04-17 14:00:00.000000], timestamp_start_call: ~N[2010-04-17 14:00:00.000000]}
+    @update_attrs %{call_duration: ~N[2011-05-18 15:01:01.000000], call_price: 43, destination: "some updated destination", timestamp_end_call: ~N[2011-05-18 15:01:01.000000], timestamp_start_call: ~N[2011-05-18 15:01:01.000000]}
+    @invalid_attrs %{call_duration: nil, call_price: nil, destination: nil, timestamp_end_call: nil, timestamp_start_call: nil}
+
+    def bill_fixture(attrs \\ %{}) do
+      {:ok, bill} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Record.create_bill()
+
+      bill
+    end
+
+    test "list_bill/0 returns all bill" do
+      bill = bill_fixture()
+      assert Record.list_bill() == [bill]
+    end
+
+    test "get_bill!/1 returns the bill with given id" do
+      bill = bill_fixture()
+      assert Record.get_bill!(bill.id) == bill
+    end
+
+    test "create_bill/1 with valid data creates a bill" do
+      assert {:ok, %Bill{} = bill} = Record.create_bill(@valid_attrs)
+      assert bill.call_duration == ~N[2010-04-17 14:00:00.000000]
+      assert bill.call_price == 42
+      assert bill.destination == "some destination"
+      assert bill.timestamp_end_call == ~N[2010-04-17 14:00:00.000000]
+      assert bill.timestamp_start_call == ~N[2010-04-17 14:00:00.000000]
+    end
+
+    test "create_bill/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Record.create_bill(@invalid_attrs)
+    end
+
+    test "update_bill/2 with valid data updates the bill" do
+      bill = bill_fixture()
+      assert {:ok, bill} = Record.update_bill(bill, @update_attrs)
+      assert %Bill{} = bill
+      assert bill.call_duration == ~N[2011-05-18 15:01:01.000000]
+      assert bill.call_price == 43
+      assert bill.destination == "some updated destination"
+      assert bill.timestamp_end_call == ~N[2011-05-18 15:01:01.000000]
+      assert bill.timestamp_start_call == ~N[2011-05-18 15:01:01.000000]
+    end
+
+    test "update_bill/2 with invalid data returns error changeset" do
+      bill = bill_fixture()
+      assert {:error, %Ecto.Changeset{}} = Record.update_bill(bill, @invalid_attrs)
+      assert bill == Record.get_bill!(bill.id)
+    end
+
+    test "delete_bill/1 deletes the bill" do
+      bill = bill_fixture()
+      assert {:ok, %Bill{}} = Record.delete_bill(bill)
+      assert_raise Ecto.NoResultsError, fn -> Record.get_bill!(bill.id) end
+    end
+
+    test "change_bill/1 returns a bill changeset" do
+      bill = bill_fixture()
+      assert %Ecto.Changeset{} = Record.change_bill(bill)
+    end
+  end
 end

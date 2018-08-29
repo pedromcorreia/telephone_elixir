@@ -26,7 +26,6 @@ defmodule TelephoneElixir.Record.Resolver do
       information_exitent = TelephoneElixir.Record.get_information_by_call_id(Map.get(arg, :call_id, nil))
 
       TelephoneElixir.Record.update_information(information_exitent, build_telephone_end(arg))
-      |> IO.inspect
     end
 
   def create_telephone_call(arg), do: nil

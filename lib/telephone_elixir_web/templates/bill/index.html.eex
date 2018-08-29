@@ -1,0 +1,34 @@
+<h2>Listing Bill</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Destination</th>
+      <th>Timestamp start call</th>
+      <th>Timestamp end call</th>
+      <th>Call duration</th>
+      <th>Call price</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for bill <- @bill do %>
+    <tr>
+      <td><%= bill.destination %></td>
+      <td><%= bill.timestamp_start_call %></td>
+      <td><%= bill.timestamp_end_call %></td>
+      <td><%= bill.call_duration %></td>
+      <td><%= bill.call_price %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: bill_path(@conn, :show, bill), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: bill_path(@conn, :edit, bill), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: bill_path(@conn, :delete, bill), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Bill", to: bill_path(@conn, :new) %></span>
