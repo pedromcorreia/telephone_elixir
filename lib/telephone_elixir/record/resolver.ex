@@ -30,6 +30,22 @@ defmodule TelephoneElixir.Record.Resolver do
 
   def create_telephone_call(arg), do: nil
 
+  def list_bill_infos(
+    %{
+      source: source,
+      reference_time: reference_time
+    } = arg) do
+      TelephoneElixir.Record.list_bill_by_source(arg)
+
+  end
+
+  defp build_bill_args(arg) do
+    %{
+      source: Map.get(arg, :source),
+      reference_time: Map.get(arg, :reference_time)
+    }
+  end
+
   defp build_telephone_start(arg) do
     %{
       call_id: Map.get(arg, :call_id, nil),

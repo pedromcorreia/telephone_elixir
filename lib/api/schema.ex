@@ -1,14 +1,21 @@
 defmodule Api.Schema do
   use Absinthe.Schema
   import_types Api.Schema.ContentTypes
+  alias Api.Resolvers.Content
 
   query do
 
-    @desc "Get all telephone infosj"
+    @desc "Get all telephone infos"
     field :telephone, list_of(:telephone_info) do
-      resolve &Resolvers.Content.list_telephone_infos/3
+      resolve &Content.list_telephone_infos/3
     end
 
+    @desc "Get all bills"
+    field :bill, list_of(:bill_info) do
+      arg(:source, non_null(:string))
+      arg(:reference_time, :string)
+      resolve &Content.list_bill_info/2
+    end
   end
 
   mutation do
@@ -21,7 +28,7 @@ defmodule Api.Schema do
       arg(:call_id, non_null(:integer))
       arg(:source, :string)
       arg(:destination, :string)
-      resolve(&Api.Resolvers.Content.create_telephone_info/2)
+      resolve(&Content.create_telephone_info/2)
     end
   end
 end

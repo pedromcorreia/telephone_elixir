@@ -9,4 +9,9 @@ defmodule Api.Schema.ContentTypes do
     field :source, :string
     field :destination, :string
   end
+
+  object :bill_info do
+    field :source, :string
+    field :reference_time, :string
+  end
 end
