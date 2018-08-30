@@ -1,5 +1,6 @@
 defmodule TelephoneElixir.Record.Resolver do
 
+  alias TelephoneElixir.Record
   def create_telephone_call(
     %{
       call_id: call_id,
@@ -11,7 +12,7 @@ defmodule TelephoneElixir.Record.Resolver do
     } = arg) do
       arg
       |> build_telephone_start()
-      |> TelephoneElixir.Record.create_information()
+      |> Record.create_information()
     end
 
   def create_telephone_call(
@@ -23,21 +24,33 @@ defmodule TelephoneElixir.Record.Resolver do
     } = arg) do
 
       #TODO replace this var name and add a conditional for not find
-      information_exitent = TelephoneElixir.Record.get_information_by_call_id(Map.get(arg, :call_id, nil))
-
-      TelephoneElixir.Record.update_information(information_exitent, build_telephone_end(arg))
+      information_exitent
+        arg
+        |> Map.get(:call_id, nil)
+        |> Record.get_information_by_call_id()
+        |> Record.update_information(build_telephone_end(arg))
     end
 
   def create_telephone_call(arg), do: nil
 
-  def list_bill_infos(
+  def list_bill_info(
     %{
       source: source,
       reference_time: reference_time
     } = arg) do
-      TelephoneElixir.Record.list_bill_by_source(arg)
-
+      Record.list_bill_by_source(arg)
   end
+
+  def list_bill_info(
+    %{
+      source: source
+    } = arg) do
+      arg
+      |> Map.put(:reference_time, create_reference_date())
+      |> Record.list_bill_by_source(arg)
+  end
+
+  defp create_reference_date(), do: Timex.shift(Timex.now(), months: -1)
 
   defp build_bill_args(arg) do
     %{

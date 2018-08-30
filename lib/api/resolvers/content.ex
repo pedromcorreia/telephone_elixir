@@ -1,7 +1,8 @@
 defmodule Api.Resolvers.Content do
 
+  alias TelephoneElixir.Record.Resolver
   def create_telephone_info(args, _params) do
-    TelephoneElixir.Record.Resolver.create_telephone_call(args)
+    Resolver.create_telephone_call(args)
     {:ok, %{status: "This info will be storage"}}
   end
 
@@ -14,8 +15,7 @@ defmodule Api.Resolvers.Content do
   end
 
   def list_bill_info(args, _params) do
-    IO.inspect args
-    TelephoneElixir.Record.Resolver.list_bill_info(args)
+    Resolver.list_bill_info(args)
     {:ok, %{status: "This info will be storage"}}
   end
 

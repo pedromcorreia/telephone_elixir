@@ -44,7 +44,8 @@ defmodule TelephoneElixir.Mixfile do
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4.0"},
       {:poison, "~> 3.0"},
-      {:corsica, "~> 1.0"}
+      {:corsica, "~> 1.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 

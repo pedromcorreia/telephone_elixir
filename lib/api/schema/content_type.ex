@@ -11,7 +11,10 @@ defmodule Api.Schema.ContentTypes do
   end
 
   object :bill_info do
-    field :source, :string
-    field :reference_time, :string
+    field :destination, :string
+    field :call_start_date, :string
+    field :call_start_time, :string
+    field :call_duration, :string
+    field :call_price, :string
   end
 end

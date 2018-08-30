@@ -36,6 +36,13 @@ defmodule TelephoneElixir.Record do
 
   alias TelephoneElixir.Record.Bill
 
+  @doc false
+   def list_bill_by_source_reference_date(source, reference_time \\ Timex.now()) do
+     Bill
+     |> where(source: ^source, reference_time: ^reference_time)
+     |> Repo.all()
+  end
+
   @doc """
   Returns the list of bill.
 
